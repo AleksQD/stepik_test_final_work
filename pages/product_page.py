@@ -19,3 +19,11 @@ class ProductPage(BasePage):
             *ProductPageLocators.BOOK_PRICE,
             *ProductPageLocators.BASKET_BOOK_PRICE), \
             "Book price no equal book price in basket"
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
+
+    def disappeared_success_message(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should have disappeared"
