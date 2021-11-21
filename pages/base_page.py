@@ -8,7 +8,6 @@ import math
 
 
 class BasePage():
-
     def __init__(self, browser, url, timeout=10):
         self.browser = browser
         self.url = url
@@ -22,7 +21,7 @@ class BasePage():
         link.click()
 
     def go_to_basket(self):
-        link = self.browser.find_element(*BasePageLocators.BASKET_BUTTON)
+        link = self.browser.find_element(*BasePageLocators.HEADER_BASKET_BUTTON)
         link.click()
 
     def is_element_present(self, how, what):
@@ -52,6 +51,7 @@ class BasePage():
 
         return True
 
+    # проверяем что добавляемый товар равен товару в корзине
     def is_element_equal_element_in_basket(self, how_elem, what_elem,
                                            how_elem_basket, what_elem_basket):
         try:
@@ -68,6 +68,10 @@ class BasePage():
     def should_be_login_link(self):
         assert self.is_element_present(
             *BasePageLocators.LOGIN_LINK), "Login link is not presented"
+
+    def should_be_authorized_user(self):
+        assert self.is_element_present(*BasePageLocators.USER_ICON), \
+            "User icon is not presented," " probably unauthorised user"
 
     def solve_quiz_and_get_code(self):
         alert = self.browser.switch_to.alert
